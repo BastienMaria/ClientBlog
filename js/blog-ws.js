@@ -17,21 +17,33 @@ $.ajax({
 
 function afficherArticle(json) {
     var data = json;
-    var contentHTML;
-
+    var contentHTML = '';
 
     $.each(data, function (i, item) {
-        var contentHTML = "<h2 class='post-title'>"
+        contentHTML = "<h2 class='post-title'>"
                 + item.title + "</h2>" + "<h3 class='post-subtitle'>"
                 + item.content + "</h3>" + "<p class='post-meta'>Posté par " + item.a_ecrit.firstname + ' ' + item.a_ecrit.lastname + " le " + item.published_on + "</p>"
                 + "<input id='textinput' name='textinput' type='text' placeholder='Ecrire un commentaire...' class='form-control input-md'><button class='btn btn-primary'>Commenter</button>"
+                + "<button class='btn btn-danger' onclick='supprimerArticle(" + item.id + ")'>Supprimer</button>"
                 + "<hr>";
 
 //console.log(contentHTML);
         $("#articlePoste").append(contentHTML);
     });
-
-
 }
 
+function supprimerArticle(articleID) {
+
+    $.ajax({
+        url: "http://localhost:8080/ProjectBlog/webresources/article/" + articleID,
+        type: "DELETE",
+        contentType: "application/json",
+        headers: {
+            Accept: "application/json"
+        },
+        success: function () { 
+            window.location.reload(true);
+        }
+    });
+}
 
