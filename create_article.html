@@ -76,7 +76,7 @@
                     <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
                     <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
                     <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form id="formArticle" >
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Titre</label>
@@ -87,7 +87,7 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <br>
-                                <input type="text" value="#tag, #exemple" data-role="tagsinput">
+                                <input type="text" value="#tag, #exemple" id="tag" data-role="tagsinput">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -113,6 +113,8 @@
                             </div>
                         </div>
                     </form>
+
+                    <div id="alert"></div>
                 </div>
             </div>
         </div>
@@ -166,7 +168,9 @@
         <script src="tagsinput/bootstrap-tagsinput.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="js/clean-blog.min.js"></script>
+        <!--<script src="js/clean-blog.min.js"></script>-->
+
+        <script src="js/blog-ws.js"></script> 
 
     </body>
 

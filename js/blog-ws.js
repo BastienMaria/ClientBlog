@@ -1,8 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 $.ajax({
     url: "http://localhost:8080/ProjectBlog/webresources/article",
@@ -14,6 +9,23 @@ $.ajax({
     },
     success: [afficherArticle]
 });
+
+//ajout d'article
+$("#formArticle").submit(function (event) {
+
+    var article = new Object();
+    var user = new Object();
+    user.id = 2;
+    article.title = $("#title").val();
+    article.keywords = $("#tag").val();
+    article.content = $("#content").val();
+    article.status = "WAITFORVALIDATION";
+    article.a_ecrit = user;
+
+    event.preventDefault();
+    ajouterArticle(article);
+});
+
 
 function afficherArticle(json) {
     var data = json;
@@ -41,9 +53,30 @@ function supprimerArticle(articleID) {
         headers: {
             Accept: "application/json"
         },
-        success: function () { 
+        success: function () {
             window.location.reload(true);
         }
     });
 }
+
+function ajouterArticle(input) {
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/ProjectBlog/webresources/article",
+        data: JSON.stringify(input),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            console.log("OK");
+            $("#formArticle")[0].reset();
+            $("#alert").append('<div class="alert alert-success" role="alert">Votre article a bien été ajouté!</div>');
+        },
+        failure: function (errMsg) {
+            console.log("KO");
+            $("#alert").append('<div class="alert alert-danger" role="alert">Erreur!</div>');
+        }
+    });
+}
+
 
