@@ -4,9 +4,20 @@
  * and open the template in the editor.
  */
 
-//include menu 
+function convertFileToBase64(input) {
 
-var content = document.querySelector('link[rel="import"]').import;
+    if (input.files && input.files[0]) {
+        var FR = new FileReader();
 
-$("#menu_include").append(content);
+        FR.onloadend = function () {
+            return FR.result;
+        };
 
+        FR.onload = function (e) {
+            $('#img').attr("src", e.target.result);
+            $('#base').text(e.target.result);
+        };
+        FR.readAsDataURL(input.files[0]);
+    }
+
+}
