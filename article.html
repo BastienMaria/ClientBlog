@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Clean Blog - Create account</title>
+        <title>Blog project - Formulaire article</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
         <link href="tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="css/clean-blog.min.css" rel="stylesheet">
+        <link href="css/clean-blog.min.css" rel="stylesheet">       
     </head>
 
     <body>
@@ -26,7 +26,7 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
+
                 <div class="navbar-header page-scroll">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
@@ -37,32 +37,28 @@
                     <a class="navbar-brand" href="index.html">Home</a>
                 </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="create_article.html">Ecrire un article</a>
+                            <a href="article.html">Ecrire un article</a>
                         </li>
                         <li>
                             <a href="connect.html">Se connecter</a>
                         </li>
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container -->
         </nav>
 
         <!-- Page Header -->
-        <!-- Set your background image for this header on the line below. -->
         <header class="intro-header" style="background-image: url('img/dsc_8914.jpg')">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                         <div class="page-heading">
-                            <h1>Créer un compte</h1>
+                            <h1>Nouvel article</h1>
                             <hr class="small">
-                            <span class="subheading">Créez un compte utilisateur et publiez vos articles!</span>
+                            <span class="subheading">Créer un nouvel article en attente de publication</span>
                         </div>
                     </div>
                 </div>
@@ -73,31 +69,36 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
-                    <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
-                    <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
-                    <form id="formUser" >
+                    <form id="formArticle" >
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>User name</label>
-                                <input type="text" class="form-control" placeholder="User name" id="username" required data-validation-required-message="Please enter your user name.">
+                                <label>Titre</label>
+                                <input type="text" class="form-control" placeholder="Titre de l'article" id="title" required data-validation-required-message="Please enter your name.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Password" id="password" required data-validation-required-message="Please enter your password.">
+                                <label>Contenu</label>
+                                <textarea rows="8" class="form-control" placeholder="Contenu" id="content" required data-validation-required-message="Please enter a content."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Avatar</label>
-                                <input id="avatarImg" type="file" name="avatarImg" accept="image/gif, image/jpeg, image/png">
+                                <br>
+                                <input type="text" value="#tag, #exemple" id="tag" data-role="tagsinput">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Image</label>
+                                <input id="fileInput" type="file" name="fileInput" accept="image/gif, image/jpeg, image/png">
                                 <br>
                                 <img alt="" id="img" src="" height="70" width="70"/>
                                 <div id="base"></div>
+
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -105,7 +106,7 @@
                         <div id="success"></div>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-default">Creer</button>
+                                <button type="submit" class="btn btn-default">Poster</button>
                             </div>
                         </div>
                     </form>
@@ -156,20 +157,17 @@
         </footer>
 
         <!-- jQuery -->
-        <script src="js/jquery.js"></script>
+        <script src="js/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
 
-        <!--Bootstrap Tagsinput-->
-        <script src="tagsinput/bootstrap-tagsinput.min.js"></script>
+        <!-- Bootstrap Tagsinput -->
+        <script src="tagsinput/bootstrap-tagsinput.min.js"></script>   
 
-        <!-- Custom Theme JavaScript -->
-        <!--<script src="js/clean-blog.min.js"></script>-->
-
-        <script src="js/blog-ws.js"></script> 
-        <script src="js/utils.js"></script> 
-
+        <!-- Custom JS -->
+        <script src="js/blog-utils.js"></script> 
+        <script src="js/blog-ws-article.js"></script>    
     </body>
 
 </html>
