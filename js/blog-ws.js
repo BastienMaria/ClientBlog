@@ -56,22 +56,81 @@ $.ajax({
 function afficherArticle(json) {
     var data = json;
     var contentHTML = '';
-    $.each(data, function (i, item) {
-        contentHTML = "<h2 class='post-title'>" + item.title + "</h2>"
-                + "<p class='post-subtitle'>" + item.content + "</p>";
-        for (var key in item.comments) {
-            if (item.comments[key] === undefined) {
-                contentHTML += "";
-            }
-            else {
-                contentHTML += "<blockquote>" + item.comments[key].comment + "</blockquote>"
-            }
-        }
-        contentHTML += "<p class='post-meta'>Posté par " + item.a_ecrit.firstname + ' ' + item.a_ecrit.lastname + " le " + item.published_on + "</p>"
-                + "<input id='textinput' name='textinput' type='text' placeholder='Ecrire un commentaire...' class='form-control input-md'><button class='btn btn-primary'>Commenter</button>"
-                + "<button class='btn btn-danger' onclick='supprimerArticle(" + item.id + ")'>Supprimer</button>"
+
+    $.each(data, function (i, article) {
+        contentHTML = "<h2 class='post-title'>" + article.title + "</h2>"
+                + "<p class='post-subtitle'>" + article.content + "</p>"
+                + "<div id='commentaireArticle" + article.id + "'></div>"
+                + "<p class='post-meta'>Poste par " + article.a_ecrit.firstname + ' ' + article.a_ecrit.lastname + " le " + article.published_on + "</p>"
+         
+                + "<input id='idarticle" + article.id + "' type='hidden' value='" + article.id + "'class='form-control input-md'>"
+                + "<input id='commente" + article.id + "' type='text' required='' placeholder='Ecrire un commentaire...' class='form-control input-md'>"
+                + "<button class='btn btn-primary' onclick='ajouterCommente(" + article.id + ")'>Commenter</button>"
+            
+                + "<button class='btn btn-info' onclick='afficherCommente(" + article.id + ")'>Afficher les commentaires</button>"
+                + "<button class='btn btn-danger' onclick='supprimerArticle(" + article.id + ")'>Supprimer</button>"
                 + "<hr>";
+
         $("#articlePoste").append(contentHTML);
+    });
+}
+
+function ajouterCommente(input) {
+
+    var commentaire = new Object();
+    var article = new Object();
+    var user = new Object();
+    console.log($("#idarticle" + input).val());
+    article.id = $("#idarticle" + input).val();
+    user.id = 2;
+    console.log($("#commente" + input).val());
+    commentaire.comment = $("#commente" + input).val();
+    commentaire.commented_date = "";
+
+    commentaire.a_commente = user;
+    commentaire.a_article = article;
+
+    ajouteComment(commentaire);
+}
+
+function ajouteComment(input) {
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/ProjectBlog/webresources/comment",
+        data: JSON.stringify(input),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            console.log("OK");
+            //$("#commente")[0].reset();
+            window.location.reload(true);
+        }
+    });
+}
+
+function afficherCommente(articleID) {
+    $.ajax({
+        url: "http://localhost:8080/ProjectBlog/webresources/comment/search/" + articleID,
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json",
+        headers: {
+            Accept: "application/json"
+        },
+        success: [afficherCommentaire]
+    });
+}
+
+function afficherCommentaire(json) {
+    var data = json;
+    var commentaireHTML = '';
+
+    $.each(data, function (i, commentaire) {
+
+        commentaireHTML += "<blockquote>" + commentaire.comment + "</blockquote>";
+
+        $("#commentaireArticle" + commentaire.a_article.id).html(commentaireHTML);
     });
 }
 
