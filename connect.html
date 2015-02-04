@@ -71,19 +71,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form id="connect">
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Login</label>
-                                <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+                                <input type="text" class="form-control" placeholder="Login" id="login">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Password" id="name" required data-validation-required-message="Please enter your name.">
+                                <input type="password" class="form-control" placeholder="Password" id="mdp">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -145,6 +144,9 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
+
+        <script src="js/blog-ws-user.js"></script>
+        <script src="js/blog-utils.js"></script>
     </body>
 
 </html>

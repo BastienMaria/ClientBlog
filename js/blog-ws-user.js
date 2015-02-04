@@ -6,6 +6,8 @@ $("#formUser").submit(function (event) {
 
     user.username = $("#username").val();
     user.password = $("#password").val();
+    user.user_status = "ENABLED";
+    user.about = "blablablabla";
 
     console.log("user : " + JSON.stringify(user));
 
@@ -39,3 +41,38 @@ function creerUtilisateur(user) {
     });
 }
 
+
+//check connection
+$("#connect").submit(function (event) {
+    event.preventDefault();
+    var username = $("#login").val();
+    console.log('username   :    ' + username);
+    var mdp = $("#mdp").val();
+    console.log('mdp   :    ' + mdp);
+    connect(username, mdp);
+});
+
+function connect(username, mdp) {
+    $.ajax({
+        url: "http://localhost:8080/ProjectBlog/webresources/users/check/",
+        type: "POST",
+        data: {
+            username: username,
+            mdp: mdp
+        },
+        success: function (data) {
+            console.log("success!");
+            console.log("data >>>   " + data);
+
+            if (data === true) {
+                //création du cookie utilisateur
+                createCookie("user", username, 0);
+
+                document.location.href = "http://localhost:8383/startbootstrap-clean-blog/index.html";
+            }
+        },
+        failure: function (errMsg) {
+            console.log("failure!");
+        }
+    });
+}
