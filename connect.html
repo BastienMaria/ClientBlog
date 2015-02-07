@@ -16,7 +16,6 @@
 
         <!-- Custom CSS -->
         <link href="css/clean-blog.min.css" rel="stylesheet">
-
     </head>
 
     <body>
@@ -38,12 +37,21 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li style="visibility: hidden">
-                            <a href="create_article.html">Ecrire un article</a>
+                        <li>
+                            <a id="menuArticle" href="article.html">Ecrire un article</a>
                         </li>
                         <li>
-                            <a href="connect.html">Se connecter</a>
+                            <a id="menuUser" href="user.html">Créer un compte</a>
                         </li>
+                        <li>
+                            <a id="menuConnect" href="connect.html" >Se connecter</a>
+                        </li>
+                        <li>
+                            <a id="menuName"></a>
+                        </li>
+                        <li>
+                            <a id="menuDeconnexion" href="#">Se déconnecter</a>
+                        </li>                       
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -146,8 +154,8 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
 
-        <script src="js/blog-ws-user.js"></script>
         <script src="js/blog-utils.js"></script>
+        <script src="js/blog-ws-user.js"></script>
     </body>
 
 </html>

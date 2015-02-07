@@ -11,7 +11,7 @@ $("#formUser").submit(function (event) {
 
     user.user_status = "ENABLED";
     user.about = "About me";
-    user.a_role.name = "User";
+    //user.a_role.name = "User";
 
     console.log("user : " + JSON.stringify(user));
 

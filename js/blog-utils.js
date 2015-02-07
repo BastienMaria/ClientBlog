@@ -6,19 +6,43 @@
 
 function convertFileToBase64(input) {
 
-    if (input.files && input.files[0]) {
-        var FR = new FileReader();
+//    if (input.files && input.files[0]) {
+//        var FR = new FileReader();
+//
+//        FR.onloadend = function () {
+//            return FR.result;
+//        };
+//
+//        FR.onload = function (e) {
+//            $('#img').attr("src", e.target.result);
+//            $('#base').text(e.target.result);
+//        };
+//        FR.readAsDataURL(input.files[0]);
+//    }
 
-        FR.onloadend = function () {
-            return FR.result;
-        };
+    var ready = false;
+    var result = '';
 
-        FR.onload = function (e) {
-            $('#img').attr("src", e.target.result);
-            $('#base').text(e.target.result);
-        };
-        FR.readAsDataURL(input.files[0]);
+    var check = function () {
+        if (ready === true) {
+            // do what you want with the result variable
+            return;
+        }
+        setTimeout(check, 1000);
     }
+
+    check();
+
+    var reader = new FileReader();
+    reader.onloadend = function (evt) {
+        // file is loaded
+        result = evt.target.result;
+
+        ready = true;
+    };
+    reader.readAsDataURL(input);
+
+    return result;
 
 }
 
@@ -53,3 +77,26 @@ function readJsonCookie(name) {
 function eraseCookie(name) {
     createCookie(name, "", -1);
 }
+
+
+$(function () {
+    if (readJsonCookie("user") !== null) {
+        $("#menuDeconnexion").show();
+        $("#menuName").show();
+        $("#menuArticle").show();
+        $("#menuUser").hide();
+        $("#menuConnect").hide();
+        $("#menuName").html(readJsonCookie("user").firstname + ' ' + readJsonCookie("user").lastname);
+    } else {
+        $("#menuDeconnexion").hide();
+        $("#menuName").hide();
+        $("#menuArticle").hide();
+        $("#menuUser").show();
+        $("#menuConnect").show();
+    }
+    $("#menuDeconnexion").click(function () {
+        eraseCookie("user");
+        window.location.reload(true);
+    });
+});
+
