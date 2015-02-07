@@ -14,13 +14,18 @@ function afficherArticle(articles) {
     var contentHTML = '';
 
     $.each(data, function (i, article) {
+
+        var dateBase = new Date(article.published_on);
+        var dateFormatee = dateBase.getDay() + "/" + (dateBase.getMonth() + 1) + "/" + dateBase.getFullYear();
+
+
         contentHTML = "<button style='float: right;' class='btn btn-info' onclick='afficherComment(" + article.id + ")'>Afficher les commentaires</button>"
 
                 + "<h2 class='post-title'>" + article.title + "</h2>"
                 + "<p class='post-subtitle'>" + article.content + "</p>"
                 + "<div id='commentaireArticle" + article.id + "'></div>"
-                + "<p class='post-meta'>Poste par " + article.a_ecrit.firstname + ' ' + article.a_ecrit.lastname + " le " + article.published_on + "</p>"
-                + "<div class='form-inline'>"
+                + "<p class='post-meta'>Poste par <b>" + article.a_ecrit.firstname + ' ' + article.a_ecrit.lastname + "</b> le <b>" + dateFormatee + "</b></p>"
+                + "<div id='divcomment" + article.id + "' class='form-inline'>"
                 + "<input id='idarticle" + article.id + "' type='hidden' value='" + article.id + "'>"
                 + "<input style='width: 85%;' id='commente" + article.id + "' type='text' required='' placeholder='Ecrire un commentaire...' class='form-control'>"
                 + "<button class='btn btn-primary' onclick='ajouterComment(" + article.id + ")'>Commenter</button>"
@@ -29,7 +34,11 @@ function afficherArticle(articles) {
                 + "<hr>";
 
         $("#articlePoste").append(contentHTML);
+        if (readJsonCookie("user") === null) {
+            $("#divcomment" + article.id).hide();
+        }
     });
+
 }
 
 //Ajouter commentaire
@@ -39,7 +48,7 @@ function ajouterComment(input) {
     var user = new Object();
 
     article.id = $("#idarticle" + input).val();
-    user.id = 2;
+    user.id = readJsonCookie("user").id;
 
     commentaire.comment = $("#commente" + input).val();
     commentaire.commented_date = "";

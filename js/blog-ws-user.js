@@ -2,8 +2,10 @@
 $("#formUser").submit(function (event) {
 
     var user = new Object();
+    var role = new Object();
     var avatar = $('input[name="avatarImg"]')[0].files[0];
 
+    role.id = 4;
     user.username = $("#username").val();
     user.password = $("#password").val();
     user.firstname = $("#firstname").val();
@@ -11,7 +13,7 @@ $("#formUser").submit(function (event) {
 
     user.user_status = "ENABLED";
     user.about = "About me";
-    //user.a_role.name = "User";
+    user.a_role = role;
 
     console.log("user : " + JSON.stringify(user));
 
