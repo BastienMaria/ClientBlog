@@ -68,7 +68,7 @@ function connect(username, mdp) {
                 //création du cookie utilisateur
                 createCookie("user", username, 0);
 
-                document.location.href = "http://localhost:8383/startbootstrap-clean-blog/index.html";
+                document.location.href = "./index.html";
             }
         },
         failure: function (errMsg) {
