@@ -69,15 +69,18 @@ function connect(username, mdp) {
         success: function (data) {
 
             if (data === false) {
-                $("#alertConnect").append('<div class="alert alert-danger" role="alert">Mot de passe ou identifiant non valide !</div>');
+                $("#alertConnect").html('<div class="alert alert-danger" role="alert">Mot de passe ou identifiant non valide !</div>');
             } else {
-                //création du cookie utilisateur
-                createCookie("user", JSON.stringify(data), 0);
-                //redirection
-                document.location.href = "./index.html";
 
-                var cookie = readJsonCookie("user");
-                console.log(cookie.firstname);
+                if (data.user_status === "ENABLED") {
+                    //création du cookie utilisateur
+                    createCookie("user", JSON.stringify(data), 0);
+                    //redirection
+                    document.location.href = "./index.html";
+                } else {
+                    $("#alertConnect").html('<div class="alert alert-danger" role="alert">Votre compte a été désactivé !</div>');
+
+                }
 
             }
         },
