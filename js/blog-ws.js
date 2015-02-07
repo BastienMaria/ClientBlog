@@ -19,9 +19,7 @@ function afficherArticle(articles) {
         var dateFormatee = dateBase.getDay() + "/" + (dateBase.getMonth() + 1) + "/" + dateBase.getFullYear();
 
 
-        contentHTML = "<button style='float: right;' class='btn btn-info' onclick='afficherComment(" + article.id + ")'>Afficher les commentaires</button>"
-
-                + "<h2 class='post-title'>" + article.title + "</h2>"
+        contentHTML = "<h2 class='post-title'>" + article.title + "</h2>"
                 + "<p class='post-subtitle'>" + article.content + "</p>"
                 + "<div id='commentaireArticle" + article.id + "'></div>"
                 + "<p class='post-meta'>Poste par <b>" + article.a_ecrit.firstname + ' ' + article.a_ecrit.lastname + "</b> le <b>" + dateFormatee + "</b></p>"
@@ -32,6 +30,20 @@ function afficherArticle(articles) {
                 + "</div>"
 
                 + "<hr>";
+
+        //Afficher les commentaires selon article via ajax
+
+        $.ajax({
+            url: "http://localhost:8080/ProjectBlog/webresources/comment/search/" + article.id,
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json",
+            headers: {
+                Accept: "application/json"
+            },
+            success: [afficherCommentaire]
+        });
+
 
         $("#articlePoste").append(contentHTML);
         if (readJsonCookie("user") === null) {
@@ -74,19 +86,6 @@ function ajouterCommentaire(comment) {
     });
 }
 
-//Afficher les commentaires selon article via ajax
-function afficherComment(idArticle) {
-    $.ajax({
-        url: "http://localhost:8080/ProjectBlog/webresources/comment/search/" + idArticle,
-        type: "GET",
-        dataType: "json",
-        contentType: "application/json",
-        headers: {
-            Accept: "application/json"
-        },
-        success: [afficherCommentaire]
-    });
-}
 
 //Afficher commentaire
 function afficherCommentaire(comment) {
