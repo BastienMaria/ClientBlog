@@ -16,6 +16,9 @@
 
         <!-- Custom CSS -->
         <link href="css/clean-blog.min.css" rel="stylesheet">
+        
+        <!-- Datatables CSS -->
+        <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" rel="stylesheet">
     </head>
 
     <body>
@@ -74,7 +77,18 @@
         <!-- Post Content -->
         <article>
             <div class="container">
+                <table id="example" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Login</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Action</th>
+                        </tr>                     
+                    </thead>
+                </table>
 
+                <div id="chart_div" style="width: 50%; height: 350px;"></div>
             </div>
         </article>
 
@@ -119,12 +133,25 @@
 
         <!-- jQuery -->
         <script src="js/jquery.min.js"></script>
+        <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
 
         <!-- Custom JS -->
         <script src="js/blog-utils.js"></script>
-        <script src="js/blog-ws.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script src="js/blog-ws-admin.js"></script>
+
+        <script>
+            $(function () {
+                if (readJsonCookie("user") === null || readJsonCookie("user").a_role.name === 'User') {
+                    $("body").hide();
+                    document.location.href = "./index.html";
+                }
+            });
+        </script>
+
+
     </body>
 </html>

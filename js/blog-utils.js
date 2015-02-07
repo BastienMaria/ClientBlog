@@ -94,6 +94,9 @@ $(function () {
         $("#menuUser").show();
         $("#menuConnect").show();
     }
+    if(readJsonCookie("user").a_role.name === "Admin"){
+        $("#menuName").attr("href", "./admin.html");
+    }
     $("#menuDeconnexion").click(function () {
         eraseCookie("user");
         window.location.reload(true);
