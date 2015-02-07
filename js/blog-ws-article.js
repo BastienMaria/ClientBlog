@@ -1,11 +1,10 @@
 //Ajout d'article via form
 $("#formArticle").submit(function (event) {
-    alert('test')
     var article = new Object();
     var user = new Object();
     var picture = $('input[name="fileInput"]')[0].files[0];
 
-    user.id = 2;
+    user.id = readJsonCookie("user").id;
     article.title = $("#title").val();
     article.keywords = $("#tag").val();
     article.content = $("#content").val();
