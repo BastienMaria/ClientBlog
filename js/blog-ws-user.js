@@ -6,8 +6,12 @@ $("#formUser").submit(function (event) {
 
     user.username = $("#username").val();
     user.password = $("#password").val();
+    user.firstname = $("#firstname").val();
+    user.lastname = $("#lastname").val();
+
     user.user_status = "ENABLED";
-    user.about = "blablablabla";
+    user.about = "About me";
+    user.a_role.name = "User";
 
     console.log("user : " + JSON.stringify(user));
 
@@ -61,18 +65,22 @@ function connect(username, mdp) {
             mdp: mdp
         },
         success: function (data) {
-            console.log("success!");
-            console.log("data >>>   " + data);
 
-            if (data === true) {
+            if (data === false) {
+                $("#alertConnect").append('<div class="alert alert-danger" role="alert">Mot de passe ou identifiant non valide !</div>');
+            } else {
                 //création du cookie utilisateur
-                createCookie("user", username, 0);
-
+                createCookie("user", JSON.stringify(data), 0);
+                //redirection
                 document.location.href = "./index.html";
+
+                var cookie = readJsonCookie("user");
+                console.log(cookie.firstname);
+
             }
         },
         failure: function (errMsg) {
-            console.log("failure!");
+            console.log("failure")
         }
     });
 }
