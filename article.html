@@ -20,6 +20,26 @@
         <!-- Custom CSS -->
         <link href="css/clean-blog.min.css" rel="stylesheet">
 
+        <!-- jQuery -->
+        <script src="js/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- Bootstrap Tagsinput -->
+        <script src="tagsinput/bootstrap-tagsinput.min.js"></script>   
+
+        <!-- Custom JS -->
+        <script src="js/blog-ws-article.js"></script>  
+        <script src="js/blog-utils.js"></script> 
+        <script>
+            $(function () {
+                if (readJsonCookie("user") === null) {
+                    document.location.href = "./index.html";
+                }
+            });
+        </script>
+
     </head>
 
     <body>
@@ -166,18 +186,6 @@
             </div>
         </footer>
 
-        <!-- jQuery -->
-        <script src="js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
-
-        <!-- Bootstrap Tagsinput -->
-        <script src="tagsinput/bootstrap-tagsinput.min.js"></script>   
-
-        <!-- Custom JS -->
-        <script src="js/blog-utils.js"></script> 
-        <script src="js/blog-ws-article.js"></script>    
     </body>
 
 </html>
