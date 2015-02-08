@@ -90,6 +90,9 @@ $(function () {
         if (readJsonCookie("user").a_role.name === "Admin") {
             $("#menuName").attr("href", "./admin.html");
         }
+        if (readJsonCookie("user").a_role.name === "User") {
+            $("#menuName").attr("href", "./compte.html");
+        }
     } else {
         $("#menuDeconnexion").hide();
         $("#menuName").hide();
