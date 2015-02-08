@@ -38,11 +38,11 @@ function creerUtilisateur(user) {
         success: function (data) {
             console.log("OK");
             $("#formUser")[0].reset();
-            $("#alert").append('<div class="alert alert-success" role="alert">Compte créé !</div>');
+            $("#alert").html('<div class="alert alert-success" role="alert">Compte créé !</div>');
         },
         failure: function (errMsg) {
             console.log("KO");
-            $("#alert").append('<div class="alert alert-danger" role="alert">Erreur !</div>');
+            $("#alert").html('<div class="alert alert-danger" role="alert">Erreur !</div>');
         }
     });
 }

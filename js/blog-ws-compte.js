@@ -53,11 +53,11 @@ function modifierUtilisateur(user) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            $("#alert").append('<div class="alert alert-success" role="alert">Compte modifié !</div>');
+            $("#alert").html('<div class="alert alert-success" role="alert">Compte modifié !</div>');
         },
         failure: function (errMsg) {
             console.log("KO");
-            $("#alert").append('<div class="alert alert-danger" role="alert">Erreur !</div>');
+            $("#alert").html('<div class="alert alert-danger" role="alert">Erreur !</div>');
         }
     });
 }
