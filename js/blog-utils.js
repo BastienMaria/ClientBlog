@@ -87,6 +87,9 @@ $(function () {
         $("#menuUser").hide();
         $("#menuConnect").hide();
         $("#menuName").html(readJsonCookie("user").firstname + ' ' + readJsonCookie("user").lastname);
+        if (readJsonCookie("user").a_role.name === "Admin") {
+            $("#menuName").attr("href", "./admin.html");
+        }
     } else {
         $("#menuDeconnexion").hide();
         $("#menuName").hide();
@@ -94,9 +97,7 @@ $(function () {
         $("#menuUser").show();
         $("#menuConnect").show();
     }
-    if(readJsonCookie("user").a_role.name === "Admin"){
-        $("#menuName").attr("href", "./admin.html");
-    }
+
     $("#menuDeconnexion").click(function () {
         eraseCookie("user");
         window.location.reload(true);

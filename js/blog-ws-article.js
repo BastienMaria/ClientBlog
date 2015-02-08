@@ -35,13 +35,11 @@ function ajouterArticle(article) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            console.log("OK");
             $("#formArticle")[0].reset();
-            $("#alert").append('<div class="alert alert-success" role="alert">Votre article a bien été ajouté !</div>');
+            $("#alert").html('<div class="alert alert-success" role="alert">Votre article a bien été ajouté !</div>');
         },
         failure: function (errMsg) {
-            console.log("KO");
-            $("#alert").append('<div class="alert alert-danger" role="alert">Erreur !</div>');
+            $("#alert").html('<div class="alert alert-danger" role="alert">Erreur !</div>');
         }
     });
 }
