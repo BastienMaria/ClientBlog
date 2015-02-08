@@ -1,8 +1,8 @@
 function initialize() {
 
-    var myLatlng = new google.maps.LatLng(-25.363882, 131.044922);
+    var myLatlng = new google.maps.LatLng(49.42831, 44.11050);
     var mapOptions = {
-        zoom: 2,
+        zoom: 3,
         center: myLatlng
     };
 
@@ -19,29 +19,32 @@ function initialize() {
         success: function (data) {
             $.each(data, function (i, data) {
 
-                var contentString = '<div id="content">' +
-                        '<div id="siteNotice">' +
-                        '</div>' +
-                        '<h1 id="firstHeading" class="firstHeading">' + data.title + '</h1>' +
-                        '<div id="bodyContent">' +
-                        '<p>' + data.content + '</p>' +
-                        '<p>Auteur : ' + data.a_ecrit.firstname + ' ' + data.a_ecrit.lastname + '</p>' +
-                        '</div>' +
-                        '</div>';
+                if (data.status === "PUBLISHED") {
 
-                var infowindow = new google.maps.InfoWindow({
-                    content: contentString
-                });
+                    var contentString = '<div id="content">' +
+                            '<div id="siteNotice">' +
+                            '</div>' +
+                            '<h1 id="firstHeading" class="firstHeading">' + data.title + '</h1>' +
+                            '<div id="bodyContent">' +
+                            '<p>' + data.content + '</p>' +
+                            '<p>Auteur : ' + data.a_ecrit.firstname + ' ' + data.a_ecrit.lastname + '</p>' +
+                            '</div>' +
+                            '</div>';
 
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(data.position_latitude, data.position_longitude),
-                    map: map,
-                    title: data.title
-                });
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
 
-                google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.open(map, marker);
-                });
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(data.position_latitude, data.position_longitude),
+                        map: map,
+                        title: data.title
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.open(map, marker);
+                    });
+                }
             });
         }
     });
