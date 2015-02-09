@@ -56,7 +56,7 @@ function afficherTableUsers(json) {
         var dataselect = table.row($(this).parents('tr')).data();
         var jsonuser = new Object();
         var jsonrole = new Object();
-                
+
         jsonuser.id = dataselect[3];
         jsonuser.username = dataselect[0];
         jsonuser.lastname = dataselect[2];
@@ -68,7 +68,7 @@ function afficherTableUsers(json) {
         jsonrole.id = dataselect[6];
         jsonuser.photo = dataselect[7];
         jsonuser.about = dataselect[8];
-                
+
         $.ajax({
             url: "http://localhost:8080/ProjectBlog/webresources/users/" + dataselect[3],
             type: "PUT",
@@ -88,8 +88,8 @@ function afficherTableUsers(json) {
     $('#userAdmin tbody').on('click', '#desactive', function () {
         var dataselect = table.row($(this).parents('tr')).data();
         var jsonuser = new Object();
-        var jsonrole = new Object(); 
-        
+        var jsonrole = new Object();
+
         jsonuser.id = dataselect[3];
         jsonuser.username = dataselect[0];
         jsonuser.lastname = dataselect[2];
@@ -101,7 +101,7 @@ function afficherTableUsers(json) {
         jsonuser.a_role = jsonrole;
         jsonuser.photo = dataselect[7];
         jsonuser.about = dataselect[8];
-        
+
         $.ajax({
             url: "http://localhost:8080/ProjectBlog/webresources/users/" + dataselect[3],
             type: "PUT",
@@ -155,21 +155,21 @@ function afficherTableArticle(json) {
         var dataselect = table.row($(this).parents('tr')).data();
         var jsonarticle = new Object();
         var jsonuser = new Object();
-              
+
         jsonarticle.id = dataselect[4];
-        
+
         jsonarticle.title = dataselect[0];
         jsonarticle.keywords = dataselect[1];
         jsonarticle.published_on = dataselect[2];
-        jsonarticle.content = dataselect[3];        
+        jsonarticle.content = dataselect[3];
         jsonarticle.photo = dataselect[5];
-        jsonarticle.position_longitude = dataselect[6];        
+        jsonarticle.position_longitude = dataselect[6];
         jsonarticle.position_latitude = dataselect[7];
         jsonarticle.position_name = dataselect[8];
         jsonarticle.status = "PUBLISHED";
         jsonuser.id = dataselect[9];
         jsonarticle.a_ecrit = jsonuser;
-                
+
         $.ajax({
             url: "http://localhost:8080/ProjectBlog/webresources/article/" + dataselect[4],
             type: "PUT",
@@ -191,21 +191,21 @@ function afficherTableArticle(json) {
         var dataselect = table.row($(this).parents('tr')).data();
         var jsonarticle = new Object();
         var jsonuser = new Object();
-                
+
         jsonarticle.id = dataselect[4];
-        
+
         jsonarticle.title = dataselect[0];
         jsonarticle.keywords = dataselect[1];
         jsonarticle.published_on = dataselect[2];
         jsonarticle.content = dataselect[3];
         jsonarticle.photo = dataselect[5];
-        jsonarticle.position_longitude = dataselect[6];        
+        jsonarticle.position_longitude = dataselect[6];
         jsonarticle.position_latitude = dataselect[7];
         jsonarticle.position_name = dataselect[8];
         jsonarticle.status = "REPORTASABUSED";
         jsonuser.id = dataselect[9];
         jsonarticle.a_ecrit = jsonuser;
-        
+
         $.ajax({
             url: "http://localhost:8080/ProjectBlog/webresources/article/" + dataselect[4],
             type: "PUT",
@@ -223,25 +223,35 @@ function afficherTableArticle(json) {
     });
 }
 
+$.ajax({
+    url: "http://localhost:8080/ProjectBlog/webresources/article/countTag",
+    type: "GET",
+    dataType: "json",
+    contentType: "application/json",
+    headers: {
+        Accept: "application/json"
+    },
+    success: [drawChart]
+});
 
-google.load("visualization", "1", {packages: ["corechart"]});
-google.setOnLoadCallback(drawChart);
-function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Date', 'Nombre articles'],
-        ['01/02/2015', 10],
-        ['02/02/2015', 8],
-        ['03/02/2015', 2],
-        ['04/02/2015', 11],
-        ['05/02/2015', 20]
-    ]);
+
+function drawChart(json) {
+    var table = new Array;
+    table.push(['Tag', 'Nombre']);
+    $.each(json, function (i, ligne) {
+        table.push(ligne);
+    });
+
+
+    var data = google.visualization.arrayToDataTable(table);
 
     var options = {
-        title: "Publication de l'année en cours",
-        hAxis: {title: 'Date de publication', titleTextStyle: {color: '#333'}},
-        vAxis: {minValue: 0}
+        title: 'Répartition des tags'
     };
 
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
     chart.draw(data, options);
 }
+
+google.load("visualization", "1", {packages: ["corechart"]});

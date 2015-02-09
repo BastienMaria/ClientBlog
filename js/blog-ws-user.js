@@ -3,7 +3,6 @@ $("#formUser").submit(function (event) {
 
     var user = new Object();
     var role = new Object();
-    var avatar = $('input[name="avatarImg"]')[0].files[0];
 
     role.id = 4;
     user.username = $("#username").val();

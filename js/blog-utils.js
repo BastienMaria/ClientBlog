@@ -3,48 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+$(function () {
+    $('#fileInput').on('change', handleFileSelect);
+});
 
-function convertFileToBase64(input) {
+var handleFileSelect = function (evt) {
+    var files = evt.target.files;
+    var file = files[0];
 
-//    if (input.files && input.files[0]) {
-//        var FR = new FileReader();
-//
-//        FR.onloadend = function () {
-//            return FR.result;
-//        };
-//
-//        FR.onload = function (e) {
-//            $('#img').attr("src", e.target.result);
-//            $('#base').text(e.target.result);
-//        };
-//        FR.readAsDataURL(input.files[0]);
-//    }
+    if (files && file) {
+        var reader = new FileReader();
 
-    var ready = false;
-    var result = '';
+        reader.onload = function (readerEvt) {
+            var binaryString = readerEvt.target.result;
+            $("#base64").val(btoa(binaryString));
+        };
 
-    var check = function () {
-        if (ready === true) {
-            // do what you want with the result variable
-            return;
-        }
-        setTimeout(check, 1000);
+        reader.readAsBinaryString(file);
     }
-
-    check();
-
-    var reader = new FileReader();
-    reader.onloadend = function (evt) {
-        // file is loaded
-        result = evt.target.result;
-
-        ready = true;
-    };
-    reader.readAsDataURL(input);
-
-    return result;
-
-}
+};
 
 //Si le nombre de jours vaut 0, le cookie sera effacé à la fermeture du navigateur. Si vous mettez un nombre négatif de jours, le cookie sera effacé immédiatement.
 function createCookie(name, value, days) {
@@ -105,5 +82,6 @@ $(function () {
         eraseCookie("user");
         window.location.reload(true);
     });
-});
+}
+);
 

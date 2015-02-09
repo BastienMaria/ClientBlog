@@ -20,7 +20,6 @@ $("#formCompte").submit(function (event) {
 
     var user = new Object();
     var role = new Object();
-    var avatar = $('input[name="avatarImg"]')[0].files[0];
 
     user.id = readJsonCookie("user").id;
     user.username = $("#username").val();

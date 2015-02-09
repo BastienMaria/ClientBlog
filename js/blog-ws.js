@@ -22,7 +22,7 @@ function afficherArticle(articles) {
         contentHTML = "<h2 class='post-title'>" + article.title + "</h2>"
                 + "<p class='post-subtitle'>" + article.content + "</p>"
                 + "<div id='commentaireArticle" + article.id + "'></div>"
-                + "<p class='post-meta'>Poste par <b>" + article.a_ecrit.firstname + ' ' + article.a_ecrit.lastname + "</b> le <b>" + dateFormatee + "</b></p>"
+                + "<p class='post-meta'>Poste par <b>" + article.a_ecrit.firstname + ' ' + article.a_ecrit.lastname + "</b> le <b>" + dateBase + "</b></p>"
                 + "<div id='divcomment" + article.id + "' class='form-inline'>"
                 + "<input id='idarticle" + article.id + "' type='hidden' value='" + article.id + "'>"
                 + "<input style='width: 85%;' id='commente" + article.id + "' type='text' required='' placeholder='Ecrire un commentaire...' class='form-control'>"
