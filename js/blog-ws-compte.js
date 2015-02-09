@@ -15,6 +15,72 @@ $.ajax({
     }
 });
 
+$.ajax({
+    url: "http://localhost:8080/ProjectBlog/webresources/article/user/" + readJsonCookie("user").id,
+    type: "GET",
+    dataType: "json",
+    contentType: "application/json",
+    headers: {
+        Accept: "application/json"
+    },
+    success: [afficherTableArticleUser]
+});
+
+function afficherTableArticleUser(json) {
+
+    var tbody = "<tr>";
+
+    $.each(json, function (i, json) {
+
+        tbody += "<td><input type='text' value='" + json.title + "'></td>"
+                + "<td><input type='text' value='" + json.keywords + "'></td>"
+                + "<td><input type='text' value='" + json.published_on + "'></td>"
+                + "<td><input type='text' value='" + json.content + "'></td>"
+
+                + "<td><button id='#modif' class='btn btn-info' onclick='modifArticle(" + json.id + ',' + json.position_longitude + ',' + json.position_latitude + ',' + json.position_name + ',' + json.a_ecrit.id + ")'>Modifier</button></td>"
+                + "<td><input type='hidden'value='" + json.photo + "'></td>";
+        tbody += "<tr>";
+    });
+    
+    $("#articleUser").html(tbody)
+
+
+    /*$('#articleUser tbody').on('click', '#modif', function () {
+     var dataselect = table.row($(this).parents('tr')).data();
+     var jsonarticle = new Object();
+     var jsonuser = new Object();
+     
+     jsonarticle.id = dataselect[4];
+     
+     jsonarticle.title = dataselect[0];
+     jsonarticle.keywords = dataselect[1];
+     jsonarticle.published_on = dataselect[2];
+     jsonarticle.content = dataselect[3];
+     jsonarticle.photo = dataselect[5];
+     jsonarticle.position_longitude = dataselect[6];
+     jsonarticle.position_latitude = dataselect[7];
+     jsonarticle.position_name = dataselect[8];
+     jsonuser.id = dataselect[9];
+     jsonarticle.a_ecrit = jsonuser;
+     
+     $.ajax({
+     url: "http://localhost:8080/ProjectBlog/webresources/article/" + dataselect[4],
+     type: "PUT",
+     data: JSON.stringify(jsonarticle),
+     dataType: "json",
+     contentType: "application/json",
+     headers: {
+     Accept: "application/json"
+     },
+     success: function (data) {
+     $("#alertArticle").html('<div class="alert alert-info" role="alert">Article publié !</div>');
+     window.location.reload(true);
+     }
+     });
+     
+     });*/
+}
+
 //création compte utilisateur
 $("#formCompte").submit(function (event) {
 

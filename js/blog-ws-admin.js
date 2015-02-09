@@ -124,7 +124,7 @@ function afficherTableArticle(json) {
 
     $.each(json, function (i, json) {
         var jsonObject = new Array();
-
+        
         jsonObject.push(json.title);
         jsonObject.push(json.keywords);
         jsonObject.push(json.published_on);
@@ -224,7 +224,7 @@ function afficherTableArticle(json) {
 }
 
 $.ajax({
-    url: "http://localhost:8080/ProjectBlog/webresources/article/countTag",
+    url: "http://localhost:8080/ProjectBlog/webresources/article/countArticleByTag",
     type: "GET",
     dataType: "json",
     contentType: "application/json",

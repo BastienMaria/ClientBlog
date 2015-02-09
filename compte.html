@@ -16,6 +16,7 @@
 
         <!-- Custom CSS -->
         <link href="css/clean-blog.min.css" rel="stylesheet">
+   
     </head>
 
     <body>
@@ -122,8 +123,26 @@
                             </div>
                         </div>
                     </form>
-
                     <div id="alert"></div>
+                    <br />
+                    <hr>
+                    <br />
+                    <table class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Keywords</th>
+                                <th>Published on</th>
+                                <th>Content</th>
+                                <th>Actions</th>
+                            </tr>                     
+                        </thead>
+                        <tbody id="articleUser" >
+                            
+                        </tbody>
+                    </table>
+                    <div id="alertArticle"></div>
+
                 </div>
             </div>
         </div>
@@ -143,7 +162,8 @@
 
         <!-- jQuery -->
         <script src="js/jquery.min.js"></script>
-
+        <script src="js/jquery.dataTables.min.js"></script>
+        
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
 
