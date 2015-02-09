@@ -12,11 +12,6 @@ $.ajax({
         $("#firstname").val(data.firstname);
         $("#lastname").val(data.lastname);
         $("#about").val(data.about);
-
-        window.setTimeout(function ()
-        {
-            window.location.reload(true);
-        }, 2000);
     }
 });
 
@@ -121,6 +116,11 @@ function modifierUtilisateur(user) {
         dataType: "json",
         success: function (data) {
             $("#alert").html('<div class="alert alert-success" role="alert">Compte modifié !</div>');
+
+            window.setTimeout(function ()
+            {
+                window.location.reload(true);
+            }, 2000);
         },
         failure: function (errMsg) {
             $("#alert").html('<div class="alert alert-danger" role="alert">Erreur !</div>');
