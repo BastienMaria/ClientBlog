@@ -15,14 +15,17 @@ function afficherArticle(articles) {
 
     $.each(data, function (i, article) {
 
-        var dateBase = new Date(article.published_on);
-        var dateFormatee = dateBase.getDay() + "/" + (dateBase.getMonth() + 1) + "/" + dateBase.getFullYear();
+        var dateBase = new Date(article.published_on * 1000);
+        var dateFormatee = dateBase.getDate() + "/" + (dateBase.getMonth() + 1) + "/" + dateBase.getFullYear();
 
 
         contentHTML = "<h2 class='post-title'>" + article.title + "</h2>"
+                //+ "<div id='divImg" + article.id + "'></div>"
+                //  + "<img src='' id='photo" + article.id + "'>"
+                + "<img id='imgB64' src='data:image/png;base64," + article.photo + "'>"
                 + "<p class='post-subtitle'>" + article.content + "</p>"
                 + "<div id='commentaireArticle" + article.id + "'></div>"
-                + "<p class='post-meta'>Poste par <b>" + article.a_ecrit.firstname + ' ' + article.a_ecrit.lastname + "</b> le <b>" + dateBase + "</b></p>"
+                + "<p class='post-meta'>Poste par <b>" + article.a_ecrit.firstname + ' ' + article.a_ecrit.lastname + "</b> le <b>" + dateFormatee + "</b></p>"
                 + "<div id='divcomment" + article.id + "' class='form-inline'>"
                 + "<input id='idarticle" + article.id + "' type='hidden' value='" + article.id + "'>"
                 + "<input style='width: 85%;' id='commente" + article.id + "' type='text' required='' placeholder='Ecrire un commentaire...' class='form-control'>"
@@ -30,6 +33,10 @@ function afficherArticle(articles) {
                 + "</div>"
 
                 + "<hr>";
+
+        if ($("#imgB64").attr('src') === "data:image/png;base64,null") {
+            $("#imgB64").remove();
+        }
 
         //Afficher les commentaires selon article via ajax
 
