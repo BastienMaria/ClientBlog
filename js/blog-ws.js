@@ -15,7 +15,7 @@ function afficherArticle(articles) {
 
     $.each(data, function (i, article) {
 
-        var dateBase = new Date(article.published_on * 1000);
+        var dateBase = new Date(article.published_on);
         var dateFormatee = dateBase.getDate() + "/" + (dateBase.getMonth() + 1) + "/" + dateBase.getFullYear();
 
 
