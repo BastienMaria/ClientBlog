@@ -12,6 +12,11 @@ $.ajax({
         $("#firstname").val(data.firstname);
         $("#lastname").val(data.lastname);
         $("#about").val(data.about);
+
+        window.setTimeout(function ()
+        {
+            window.location.reload(true);
+        }, 2000);
     }
 });
 
@@ -32,56 +37,58 @@ function afficherTableArticleUser(json) {
 
     $.each(json, function (i, json) {
 
-        tbody += "<td><input type='text' value='" + json.title + "'></td>"
-                + "<td><input type='text' value='" + json.keywords + "'></td>"
-                + "<td><input type='text' value='" + json.published_on + "'></td>"
-                + "<td><input type='text' value='" + json.content + "'></td>"
-
-                + "<td><button id='#modif' class='btn btn-info' onclick='modifArticle(" + json.id + ',' + json.position_longitude + ',' + json.position_latitude + ',' + json.position_name + ',' + json.a_ecrit.id + ")'>Modifier</button></td>"
-                + "<td><input type='hidden'value='" + json.photo + "'></td>";
+        tbody += "<td><input id='title" + json.id + "' type='text' value='" + json.title + "'></td>"
+                + "<td><input id='keywords" + json.id + "' type='text' value='" + json.keywords + "'></td>"
+                + "<td><input id='content" + json.id + "' type='text' value='" + json.content + "'></td>"
+                + "<td><button id='#modif' class='btn btn-default' onclick='modifArticle(" + json.id + ',' + json.published_on + ',' + json.position_longitude + ',' + json.position_latitude + ',' + '"' + json.position_name + '"' + ',' + json.a_ecrit.id + ")'>Modifier</button></td>"
+                + "<td><input id='photo" + json.id + "' type='hidden' value='" + json.photo + "'></td>";
         tbody += "<tr>";
     });
-    
-    $("#articleUser").html(tbody)
 
-
-    /*$('#articleUser tbody').on('click', '#modif', function () {
-     var dataselect = table.row($(this).parents('tr')).data();
-     var jsonarticle = new Object();
-     var jsonuser = new Object();
-     
-     jsonarticle.id = dataselect[4];
-     
-     jsonarticle.title = dataselect[0];
-     jsonarticle.keywords = dataselect[1];
-     jsonarticle.published_on = dataselect[2];
-     jsonarticle.content = dataselect[3];
-     jsonarticle.photo = dataselect[5];
-     jsonarticle.position_longitude = dataselect[6];
-     jsonarticle.position_latitude = dataselect[7];
-     jsonarticle.position_name = dataselect[8];
-     jsonuser.id = dataselect[9];
-     jsonarticle.a_ecrit = jsonuser;
-     
-     $.ajax({
-     url: "http://localhost:8080/ProjectBlog/webresources/article/" + dataselect[4],
-     type: "PUT",
-     data: JSON.stringify(jsonarticle),
-     dataType: "json",
-     contentType: "application/json",
-     headers: {
-     Accept: "application/json"
-     },
-     success: function (data) {
-     $("#alertArticle").html('<div class="alert alert-info" role="alert">Article publié !</div>');
-     window.location.reload(true);
-     }
-     });
-     
-     });*/
+    $("#articleUser").html(tbody);
 }
 
-//création compte utilisateur
+function modifArticle(id, published, long, lat, pos, role) {
+
+    var article = new Object();
+    var user = new Object();
+
+    article.id = id;
+
+    article.title = $("#title" + id).val();
+    article.keywords = $("#keywords" + id).val();
+    article.content = $("#content" + id).val();
+    article.photo = $("#photo" + id).val();
+    article.published_on = published;
+    article.status = "WAITFORVALIDATION";
+    article.position_longitude = long;
+    article.position_latitude = lat;
+    article.position_name = pos;
+    user.id = role;
+    article.a_ecrit = user;
+
+    $.ajax({
+        url: "http://localhost:8080/ProjectBlog/webresources/article/" + id,
+        type: "PUT",
+        data: JSON.stringify(article),
+        dataType: "json",
+        contentType: "application/json",
+        headers: {
+            Accept: "application/json"
+        },
+        success: function (data) {
+            $("#alertArticle").html('<div class="alert alert-info" role="alert">Article modifié !</div>');
+            window.setTimeout(function ()
+            {
+                window.location.reload(true);
+            }, 2000);
+        }
+    });
+
+
+}
+
+//modif compte utilisateur
 $("#formCompte").submit(function (event) {
 
     var user = new Object();
@@ -103,12 +110,7 @@ $("#formCompte").submit(function (event) {
     modifierUtilisateur(user);
 });
 
-//Affichage aperçu vignette
-$("#fileInput").change(function () {
-    convertFileToBase64(this);
-});
-
-//Creation utilisateur
+//Modif utilisateur
 function modifierUtilisateur(user) {
 
     $.ajax({
@@ -121,7 +123,6 @@ function modifierUtilisateur(user) {
             $("#alert").html('<div class="alert alert-success" role="alert">Compte modifié !</div>');
         },
         failure: function (errMsg) {
-            console.log("KO");
             $("#alert").html('<div class="alert alert-danger" role="alert">Erreur !</div>');
         }
     });

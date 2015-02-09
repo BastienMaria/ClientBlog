@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Clean Blog - Sample Post</title>
+        <title>Clean Blog - Admin</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -45,6 +45,9 @@
                             <a id="menuUser" href="user.html">Créer un compte</a>
                         </li>
                         <li>
+                            <a id="menuMap" href="map.html" >Map</a>
+                        </li>
+                        <li>
                             <a id="menuConnect" href="connect.html" >Se connecter</a>
                         </li>
                         <li>
@@ -75,43 +78,45 @@
         </header>
 
         <!-- Post Content -->
-        <article>
-            <div class="container">
-                <table id="userAdmin" class="display" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Login</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Action</th>
-                        </tr>                     
-                    </thead>
-                </table>
 
-                <div id="alertUser"></div>
+        <div class="container">
+            <h3>Admininistration </h3>
+            <table id="userAdmin" class="display" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Login</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Action</th>
+                    </tr>                     
+                </thead>
+            </table>
 
-                <br /><br />
+            <div id="alertUser"></div>
 
-                <table id="articleAdmin" class="display" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Keywords</th>
-                            <th>Published on</th>
-                            <th>Content</th>
-                            <th>Actions</th>
-                        </tr>                     
-                    </thead>
-                </table>
+            <br /><br />
 
-                <div id="alertArticle"></div>
+            <table id="articleAdmin" class="display" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Keywords</th>
+                        <th>Published on</th>
+                        <th>Content</th>
+                        <th>Actions</th>
+                    </tr>                     
+                </thead>
+            </table>
 
-                <div id="piechart" style="width: 50%; height: 350px;"></div>
+            <div id="alertArticle"></div>
 
-                <div id="regions_div" style="width: 900px; height: 500px;"></div>
+            <hr>    
+            <h3>Statistiques </h3>
+            <div id="piechart" style="width: 50%; height: 350px; float: left;"></div>
 
-            </div>
-        </article>
+            <div id="regions_div" style="width: 50%; height: 350px; float: left;"></div>
+
+        </div>
 
         <hr>
 

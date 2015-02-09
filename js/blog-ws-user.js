@@ -35,12 +35,10 @@ function creerUtilisateur(user) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            console.log("OK");
             $("#formUser")[0].reset();
             $("#alert").html('<div class="alert alert-success" role="alert">Compte créé !</div>');
         },
         failure: function (errMsg) {
-            console.log("KO");
             $("#alert").html('<div class="alert alert-danger" role="alert">Erreur !</div>');
         }
     });

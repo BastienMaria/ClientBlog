@@ -20,8 +20,7 @@ function afficherArticle(articles) {
 
 
         contentHTML = "<h2 class='post-title'>" + article.title + "</h2>"
-                //+ "<div id='divImg" + article.id + "'></div>"
-                //  + "<img src='' id='photo" + article.id + "'>"
+                
                 + "<img id='imgB64' src='data:image/png;base64," + article.photo + "'>"
                 + "<p class='post-subtitle'>" + article.content + "</p>"
                 + "<div id='commentaireArticle" + article.id + "'></div>"

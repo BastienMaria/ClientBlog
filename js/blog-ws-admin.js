@@ -124,7 +124,7 @@ function afficherTableArticle(json) {
 
     $.each(json, function (i, json) {
         var jsonObject = new Array();
-        
+
         jsonObject.push(json.title);
         jsonObject.push(json.keywords);
         jsonObject.push(json.published_on);
@@ -181,7 +181,10 @@ function afficherTableArticle(json) {
             },
             success: function (data) {
                 $("#alertArticle").html('<div class="alert alert-info" role="alert">Article publié !</div>');
-                window.location.reload(true);
+                window.setTimeout(function ()
+                {
+                    window.location.reload(true);
+                }, 2000);
             }
         });
 
