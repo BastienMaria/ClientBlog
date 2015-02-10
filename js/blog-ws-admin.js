@@ -147,7 +147,7 @@ function afficherTableArticle(json) {
     JSONParam.columnDefs = [{
             "targets": -1,
             "data": null,
-            "defaultContent": "<button id='publie' class='btn btn-primary'>Validate</button><button id='report' class='btn btn-danger'>Reported</button>"
+            "defaultContent": "<button id='publie' class='btn btn-primary'>Validate</button><button id='report' class='btn btn-danger'>Deleted</button>"
         }];
 
     var table = $('#articleAdmin').DataTable(JSONParam);
@@ -192,35 +192,21 @@ function afficherTableArticle(json) {
 
     $('#articleAdmin tbody').on('click', '#report', function () {
         var dataselect = table.row($(this).parents('tr')).data();
-        var jsonarticle = new Object();
-        var jsonuser = new Object();
-
-        jsonarticle.id = dataselect[4];
-
-        jsonarticle.title = dataselect[0];
-        jsonarticle.keywords = dataselect[1];
-        jsonarticle.published_on = dataselect[2];
-        jsonarticle.content = dataselect[3];
-        jsonarticle.photo = dataselect[5];
-        jsonarticle.position_longitude = dataselect[6];
-        jsonarticle.position_latitude = dataselect[7];
-        jsonarticle.position_name = dataselect[8];
-        jsonarticle.status = "REPORTASABUSED";
-        jsonuser.id = dataselect[9];
-        jsonarticle.a_ecrit = jsonuser;
-
+        
         $.ajax({
             url: "http://localhost:8080/ProjectBlog/webresources/article/" + dataselect[4],
-            type: "PUT",
-            data: JSON.stringify(jsonarticle),
+            type: "DELETE",    
             dataType: "json",
             contentType: "application/json",
             headers: {
                 Accept: "application/json"
             },
             success: function (data) {
-                $("#alertArticle").html('<div class="alert alert-danger" role="alert">Article reporté !</div>');
-                window.location.reload(true);
+                $("#alertArticle").html('<div class="alert alert-danger" role="alert">Article supprimé !</div>');
+                window.setTimeout(function ()
+                {
+                    window.location.reload(true);
+                }, 2000);
             }
         });
     });

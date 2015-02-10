@@ -106,18 +106,3 @@ function afficherCommentaire(comment) {
     });
 }
 
-//Supprimer article
-function supprimerArticle(idArticle) {
-
-    $.ajax({
-        url: "http://localhost:8080/ProjectBlog/webresources/article/" + idArticle,
-        type: "DELETE",
-        contentType: "application/json",
-        headers: {
-            Accept: "application/json"
-        },
-        success: function () {
-            window.location.reload(true);
-        }
-    });
-}
